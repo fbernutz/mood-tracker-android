@@ -6,4 +6,6 @@
     <string name="good_mood">Good mood</string>
     <string name="saved">Mood saved</string>
     <string name="already_saved">Mood already saved</string>
+    <string name="mood_list">Mood list</string>
+    <string name="mood">Mood</string>
 </resources>

@@ -5,27 +5,23 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.view.View
 import android.arch.persistence.room.Room
+import android.content.Intent
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import kotlinx.coroutines.experimental.launch
 import kotlinx.coroutines.experimental.android.UI
 
 class MainActivity : AppCompatActivity() {
-    private var db: AppDatabase? = null
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        launch {
-            db = Room.databaseBuilder(applicationContext,
-                    AppDatabase::class.java, "moods.db").build()
-        }
-
         val onClickListener = View.OnClickListener { v ->
-            val d = db
-            d?.let {
+            val db = MoodApp.db
+            db?.let {
                 launch {
-                    d.moodDao().insert(MoodEntity(
+                    db.moodDao().insert(MoodEntity(
                             mood = when (v.id) {
                                 R.id.bad_mood -> Mood.BAD.ordinal
                                 R.id.normal_mood -> Mood.NORMAL.ordinal
@@ -44,5 +40,20 @@ class MainActivity : AppCompatActivity() {
         findViewById<ImageButton>(R.id.bad_mood).setOnClickListener(onClickListener)
         findViewById<ImageButton>(R.id.normal_mood).setOnClickListener(onClickListener)
         findViewById<ImageButton>(R.id.good_mood).setOnClickListener(onClickListener)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.activity_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        return when (item?.itemId) {
+            R.id.mood_list -> {
+                startActivity(Intent(this, MoodListActivity::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 }
