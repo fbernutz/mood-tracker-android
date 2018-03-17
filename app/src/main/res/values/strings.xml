@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MoodTracking</string>
+    <string name="choose_your_mood">Choose your mood</string>
+    <string name="bad_mood">Bad mood</string>
+    <string name="normal_mood">Normal mood</string>
+    <string name="good_mood">Good mood</string>
+    <string name="saved">Mood saved</string>
+</resources>
