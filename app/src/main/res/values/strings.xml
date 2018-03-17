@@ -5,4 +5,5 @@
     <string name="normal_mood">Normal mood</string>
     <string name="good_mood">Good mood</string>
     <string name="saved">Mood saved</string>
+    <string name="already_saved">Mood already saved</string>
 </resources>
