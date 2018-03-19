@@ -2,6 +2,7 @@ package com.example.feliziabernutz.moodtracking
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
+import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Query
 
 @Dao
@@ -14,4 +15,7 @@ interface MoodDao {
 
     @Query("SELECT * FROM mood WHERE date = :date")
     fun byDate(date: String): List<MoodEntity>
+
+    @Delete
+    fun delete(mood: MoodEntity)
 }
