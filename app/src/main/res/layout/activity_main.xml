@@ -31,21 +31,21 @@
                 style="@style/MoodButton"
                 android:id="@+id/bad_mood"
                 android:contentDescription="@string/bad_mood"
-                android:background="@drawable/selector_bad_mood"
+                android:background="@drawable/selector_mood"
                 app:srcCompat="@drawable/ic_mood_bad_black_24dp" />
 
             <ImageButton
                 style="@style/MoodButton"
                 android:id="@+id/normal_mood"
                 android:contentDescription="@string/normal_mood"
-                android:background="@drawable/selector_normal_mood"
+                android:background="@drawable/selector_mood"
                 app:srcCompat="@drawable/ic_face_black_24dp" />
 
             <ImageButton
                 style="@style/MoodButton"
                 android:id="@+id/good_mood"
                 android:contentDescription="@string/good_mood"
-                android:background="@drawable/selector_good_mood"
+                android:background="@drawable/selector_mood"
                 app:srcCompat="@drawable/ic_mood_black_24dp" />
 
         </LinearLayout>
