@@ -4,7 +4,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.view.View
-import android.arch.persistence.room.Room
 import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
@@ -17,12 +16,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val onClickListener = View.OnClickListener { v ->
+        val onClickListener = View.OnClickListener { view ->
             val db = MoodApp.db
             db?.let {
                 launch {
                     db.moodDao().insert(MoodEntity(
-                            mood = when (v.id) {
+                            mood = when (view.id) {
                                 R.id.bad_mood -> Mood.BAD.ordinal
                                 R.id.normal_mood -> Mood.NORMAL.ordinal
                                 R.id.good_mood -> Mood.GOOD.ordinal
@@ -31,7 +30,9 @@ class MainActivity : AppCompatActivity() {
 
                     launch(UI) {
                         Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
-                        finish()
+//                        finish()
+                        view.isSelected = !(view.isSelected)
+                        //TODO: dont finish app, select button
                     }
                 }
             }
