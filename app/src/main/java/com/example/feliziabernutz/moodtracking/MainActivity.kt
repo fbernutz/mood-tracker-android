@@ -16,31 +16,65 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val onClickListener = View.OnClickListener { view ->
-            val db = MoodApp.db
-            db?.let {
-                launch {
-                    db.moodDao().insert(MoodEntity(
-                            mood = when (view.id) {
-                                R.id.bad_mood -> Mood.BAD.ordinal
-                                R.id.normal_mood -> Mood.NORMAL.ordinal
-                                R.id.good_mood -> Mood.GOOD.ordinal
-                                else -> Mood.NORMAL.ordinal
-                            }))
+        val moods = arrayOf<ImageButton>(
+                findViewById(R.id.bad_mood),
+                findViewById(R.id.normal_mood),
+                findViewById(R.id.good_mood))
 
-                    launch(UI) {
-                        Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
-//                        finish()
-                        view.isSelected = !(view.isSelected)
-                        //TODO: dont finish app, select button
+        var moodForToday: MoodEntity? = null
+
+        val db = MoodApp.db
+        db?.let {
+            launch {
+                moodForToday = db.moodDao().byDate(today()).first()
+
+                launch(UI) {
+                    val mood = moodForToday
+                    mood?.let {
+                        val moodIndex = mood.mood
+                        moods.forEachIndexed { index, imageButton ->
+                            imageButton.isSelected = index == moodIndex
+                        }
                     }
                 }
             }
         }
 
-        findViewById<ImageButton>(R.id.bad_mood).setOnClickListener(onClickListener)
-        findViewById<ImageButton>(R.id.normal_mood).setOnClickListener(onClickListener)
-        findViewById<ImageButton>(R.id.good_mood).setOnClickListener(onClickListener)
+        val onClickListener = View.OnClickListener { view ->
+            db?.let {
+                launch {
+                    val mood = moodForToday
+                    mood?.let {
+                        db.moodDao().delete(mood)
+                    }
+
+                    val newMood = MoodEntity(
+                            mood = when (view.id) {
+                                R.id.bad_mood -> Mood.BAD.ordinal
+                                R.id.normal_mood -> Mood.NORMAL.ordinal
+                                R.id.good_mood -> Mood.GOOD.ordinal
+                                else -> Mood.NORMAL.ordinal
+                            })
+                    db.moodDao().insert(newMood)
+                    moodForToday = newMood
+
+                    launch(UI) {
+                        Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
+
+                        val selectedMood = moods.indexOf(view)
+                        moods.forEachIndexed { index, imageButton ->
+                            imageButton.isSelected = index == selectedMood
+                        }
+                    }
+                }
+            }
+        }
+
+        moods.forEach { button ->
+            button.isSelected = false
+            button.setOnClickListener(onClickListener)
+        }
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
