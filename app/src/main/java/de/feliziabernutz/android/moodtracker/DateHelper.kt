@@ -1,4 +1,4 @@
-package com.example.feliziabernutz.moodtracking
+package de.feliziabernutz.android.moodtracker
 
 import java.text.SimpleDateFormat
 import java.util.*

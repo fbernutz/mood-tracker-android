@@ -1,4 +1,4 @@
-package com.example.feliziabernutz.moodtracking
+package de.feliziabernutz.android.moodtracker
 
 import android.support.test.InstrumentationRegistry
 import android.support.test.runner.AndroidJUnit4

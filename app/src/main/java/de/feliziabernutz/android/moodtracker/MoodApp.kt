@@ -1,4 +1,4 @@
-package com.example.feliziabernutz.moodtracking
+package de.feliziabernutz.android.moodtracker
 
 import android.app.Application
 import android.arch.persistence.room.Room
