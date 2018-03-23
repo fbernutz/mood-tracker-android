@@ -2,8 +2,8 @@ package de.feliziabernutz.android.moodtracker
 
 import android.arch.persistence.room.Dao
 import android.arch.persistence.room.Insert
-import android.arch.persistence.room.Delete
 import android.arch.persistence.room.Query
+import android.arch.persistence.room.Update
 
 @Dao
 interface MoodDao {
@@ -16,6 +16,6 @@ interface MoodDao {
     @Query("SELECT * FROM mood WHERE date = :date")
     fun byDate(date: String): List<MoodEntity>
 
-    @Delete
-    fun delete(mood: MoodEntity)
+    @Update
+    fun update(mood: MoodEntity)
 }
