@@ -26,7 +26,10 @@ class MainActivity : AppCompatActivity() {
         val db = MoodApp.db
         db?.let {
             launch {
-                moodForToday = db.moodDao().byDate(today()).first()
+                val moodsForToday = db.moodDao().byDate(today())
+                if (!moodsForToday.isEmpty()) {
+                    moodForToday = moodsForToday.first()
+                }
 
                 launch(UI) {
                     val mood = moodForToday
