@@ -28,8 +28,10 @@ class MainActivity : AppCompatActivity() {
         db?.let {
             launch {
                 val moodsForToday = db.moodDao().byDate(today())
-                if (!moodsForToday.isEmpty()) {
-                    moodForToday = moodsForToday.first()
+                moodForToday = when (moodsForToday.count()) {
+                    0 -> null
+                    1 -> moodsForToday.first()
+                    else -> moodsForToday.last() //TODO: something went wrong, throw exception?
                 }
 
                 launch(UI) {
