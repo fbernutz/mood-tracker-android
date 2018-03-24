@@ -49,23 +49,27 @@ class MainActivity : AppCompatActivity() {
         val onClickListener = View.OnClickListener { view ->
             db?.let {
                 launch {
-                    val currentMood = moodForToday
-                    currentMood?.let {
-                        Log.d("ALL Before update", db.moodDao().all.toString())
-
-                        currentMood.mood = when (view.id) {
+                    if (moodForToday != null) {
+                        moodForToday!!.mood = when (view.id) {
                             R.id.bad_mood -> Mood.BAD.ordinal
                             R.id.normal_mood -> Mood.NORMAL.ordinal
                             R.id.good_mood -> Mood.GOOD.ordinal
                             else -> Mood.NORMAL.ordinal
                         }
 
-                        db.moodDao().update(currentMood)
-                        Log.d("ALL After update", db.moodDao().all.toString())
+                        db.moodDao().update(moodForToday!!)
+                    } else {
+                        val newMood = MoodEntity(
+                                mood = when (view.id) {
+                                    R.id.bad_mood -> Mood.BAD.ordinal
+                                    R.id.normal_mood -> Mood.NORMAL.ordinal
+                                    R.id.good_mood -> Mood.GOOD.ordinal
+                                    else -> Mood.NORMAL.ordinal
+                                }
+                        )
+                        db.moodDao().insert(newMood)
+                        moodForToday = newMood
                     }
-
-                    //TODO: insert a new moodEntity if there is no mood selected for today
-                    moodForToday = db.moodDao().all.last()
 
                     launch(UI) {
                         Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
