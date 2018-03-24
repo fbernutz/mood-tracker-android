@@ -35,9 +35,9 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 launch(UI) {
-                    val mood = moodForToday
-                    mood?.let {
-                        val moodIndex = mood.mood
+                    val currentMood = moodForToday
+                    currentMood?.let {
+                        val moodIndex = currentMood.mood
                         moods.forEachIndexed { index, imageButton ->
                             imageButton.isSelected = index == moodIndex
                         }
