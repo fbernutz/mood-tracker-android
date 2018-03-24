@@ -58,6 +58,9 @@ class MainActivity : AppCompatActivity() {
                         }
 
                         db.moodDao().update(moodForToday!!)
+                        launch(UI) {
+                            Toast.makeText(applicationContext, R.string.updated, Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         val newMood = MoodEntity(
                                 mood = when (view.id) {
@@ -69,11 +72,12 @@ class MainActivity : AppCompatActivity() {
                         )
                         db.moodDao().insert(newMood)
                         moodForToday = newMood
+                        launch(UI) {
+                            Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
+                        }
                     }
 
                     launch(UI) {
-                        Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
-
                         val selectedMood = moods.indexOf(view)
                         moods.forEachIndexed { index, imageButton ->
                             imageButton.isSelected = index == selectedMood
