@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.widget.ImageButton
 import android.view.View
 import android.content.Intent
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
@@ -50,28 +49,17 @@ class MainActivity : AppCompatActivity() {
             db?.let {
                 launch {
                     if (moodForToday != null) {
-                        moodForToday!!.mood = when (view.id) {
-                            R.id.bad_mood -> Mood.BAD.ordinal
-                            R.id.normal_mood -> Mood.NORMAL.ordinal
-                            R.id.good_mood -> Mood.GOOD.ordinal
-                            else -> Mood.NORMAL.ordinal
-                        }
-
+                        moodForToday!!.mood = moodForView(view.id).ordinal
                         db.moodDao().update(moodForToday!!)
+
                         launch(UI) {
                             Toast.makeText(applicationContext, R.string.updated, Toast.LENGTH_SHORT).show()
                         }
                     } else {
-                        val newMood = MoodEntity(
-                                mood = when (view.id) {
-                                    R.id.bad_mood -> Mood.BAD.ordinal
-                                    R.id.normal_mood -> Mood.NORMAL.ordinal
-                                    R.id.good_mood -> Mood.GOOD.ordinal
-                                    else -> Mood.NORMAL.ordinal
-                                }
-                        )
+                        val newMood = MoodEntity(mood = moodForView(view.id).ordinal)
                         db.moodDao().insert(newMood)
                         moodForToday = newMood
+
                         launch(UI) {
                             Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
                         }
@@ -92,6 +80,15 @@ class MainActivity : AppCompatActivity() {
             button.setOnClickListener(onClickListener)
         }
 
+    }
+
+    private fun moodForView(id: Int): Mood {
+        return when (id) {
+            R.id.bad_mood -> Mood.BAD
+            R.id.normal_mood -> Mood.NORMAL
+            R.id.good_mood -> Mood.GOOD
+            else -> Mood.NORMAL
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
