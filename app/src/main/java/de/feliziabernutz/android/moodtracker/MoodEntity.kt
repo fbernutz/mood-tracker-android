@@ -6,6 +6,6 @@ import android.arch.persistence.room.PrimaryKey
 
 @Entity(tableName = "mood")
 data class MoodEntity(@PrimaryKey(autoGenerate = true) var id: Int? = null,
-                @ColumnInfo(name = "mood") var mood: Int,
-                @ColumnInfo(name = "date") var date: String = today()
+                      @ColumnInfo(name = "mood") var mood: Int,
+                      @ColumnInfo(name = "date") var date: String = today()
 )
