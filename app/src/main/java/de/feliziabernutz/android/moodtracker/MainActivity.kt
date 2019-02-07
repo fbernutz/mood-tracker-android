@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 moodForToday = when (moodsForToday.count()) {
                     0 -> null
                     1 -> moodsForToday.first()
-                    else -> moodsForToday.last() //TODO: something went wrong, throw exception?
+                    else -> moodsForToday.last() // TODO: something went wrong, throw exception?
                 }
 
                 launch(Main) {
@@ -80,7 +80,6 @@ class MainActivity : AppCompatActivity() {
             button.isSelected = false
             button.setOnClickListener(onClickListener)
         }
-
     }
 
     private fun moodForView(id: Int): Mood {
