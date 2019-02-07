@@ -1,14 +1,15 @@
 package de.feliziabernutz.android.moodtracker
 
 import android.app.Application
-import android.arch.persistence.room.Room
-import kotlinx.coroutines.experimental.launch
+import androidx.room.Room
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MoodApp : Application() {
     override fun onCreate() {
         super.onCreate()
 
-        launch {
+        GlobalScope.launch {
             db = Room.databaseBuilder(applicationContext,
                     AppDatabase::class.java, "moods.db").build()
         }

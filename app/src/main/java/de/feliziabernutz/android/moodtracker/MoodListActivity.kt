@@ -1,10 +1,11 @@
 package de.feliziabernutz.android.moodtracker
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.widget.ListView
-import kotlinx.coroutines.experimental.android.UI
-import kotlinx.coroutines.experimental.launch
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MoodListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -14,9 +15,9 @@ class MoodListActivity : AppCompatActivity() {
         val listView = findViewById<ListView>(R.id.mood_list)
         val db = MoodApp.db
         db?.let {
-            launch {
+            GlobalScope.launch {
                 val adapter = MoodAdapter(db.moodDao().all)
-                launch(UI) {
+                launch(Main) {
                     listView.adapter = adapter
                 }
             }

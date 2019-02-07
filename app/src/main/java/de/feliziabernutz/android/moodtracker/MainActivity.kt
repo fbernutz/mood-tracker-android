@@ -1,6 +1,6 @@
 package de.feliziabernutz.android.moodtracker
 
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.ImageButton
 import android.view.View
@@ -8,8 +8,9 @@ import android.content.Intent
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import kotlinx.coroutines.experimental.launch
-import kotlinx.coroutines.experimental.android.UI
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,7 +26,7 @@ class MainActivity : AppCompatActivity() {
 
         val db = MoodApp.db
         db?.let {
-            launch {
+            GlobalScope.launch {
                 val moodsForToday = db.moodDao().byDate(today())
                 moodForToday = when (moodsForToday.count()) {
                     0 -> null
@@ -33,7 +34,7 @@ class MainActivity : AppCompatActivity() {
                     else -> moodsForToday.last() //TODO: something went wrong, throw exception?
                 }
 
-                launch(UI) {
+                launch(Main) {
                     val currentMood = moodForToday
                     currentMood?.let {
                         val moodIndex = currentMood.mood
@@ -47,12 +48,12 @@ class MainActivity : AppCompatActivity() {
 
         val onClickListener = View.OnClickListener { view ->
             db?.let {
-                launch {
+                GlobalScope.launch {
                     if (moodForToday != null) {
                         moodForToday!!.mood = moodForView(view.id).ordinal
                         db.moodDao().update(moodForToday!!)
 
-                        launch(UI) {
+                        launch(Main) {
                             Toast.makeText(applicationContext, R.string.updated, Toast.LENGTH_SHORT).show()
                         }
                     } else {
@@ -60,12 +61,12 @@ class MainActivity : AppCompatActivity() {
                         db.moodDao().insert(newMood)
                         moodForToday = newMood
 
-                        launch(UI) {
+                        launch(Main) {
                             Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
                         }
                     }
 
-                    launch(UI) {
+                    launch(Main) {
                         val selectedMood = moods.indexOf(view)
                         moods.forEachIndexed { index, imageButton ->
                             imageButton.isSelected = index == selectedMood

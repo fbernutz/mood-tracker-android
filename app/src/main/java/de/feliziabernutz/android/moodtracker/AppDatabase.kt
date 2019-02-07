@@ -1,7 +1,7 @@
 package de.feliziabernutz.android.moodtracker
 
-import android.arch.persistence.room.RoomDatabase
-import android.arch.persistence.room.Database
+import androidx.room.RoomDatabase
+import androidx.room.Database
 
 @Database(entities = arrayOf(MoodEntity::class), version = 1)
 abstract class AppDatabase : RoomDatabase() {
