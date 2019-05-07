@@ -7,7 +7,7 @@ import android.widget.BaseAdapter
 import android.widget.ImageView
 import android.widget.TextView
 
-class MoodAdapter(val list: List<MoodEntity>) : BaseAdapter() {
+class MoodAdapter(private val list: List<MoodEntity>) : BaseAdapter() {
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View? {
         var cv = convertView
         if (cv == null) {
