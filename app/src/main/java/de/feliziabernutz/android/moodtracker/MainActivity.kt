@@ -1,13 +1,13 @@
 package de.feliziabernutz.android.moodtracker
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.widget.ImageButton
-import android.view.View
 import android.content.Intent
+import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -18,9 +18,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val moods = arrayOf<ImageButton>(
-                findViewById(R.id.bad_mood),
-                findViewById(R.id.normal_mood),
-                findViewById(R.id.good_mood))
+            findViewById(R.id.bad_mood),
+            findViewById(R.id.normal_mood),
+            findViewById(R.id.good_mood)
+        )
 
         var moodForToday: MoodEntity? = null
 
@@ -54,7 +55,8 @@ class MainActivity : AppCompatActivity() {
                         db.moodDao().update(moodForToday!!)
 
                         launch(Main) {
-                            Toast.makeText(applicationContext, R.string.updated, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, R.string.updated, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     } else {
                         val newMood = MoodEntity(mood = moodForView(view.id).ordinal)
@@ -62,7 +64,8 @@ class MainActivity : AppCompatActivity() {
                         moodForToday = newMood
 
                         launch(Main) {
-                            Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT).show()
+                            Toast.makeText(applicationContext, R.string.saved, Toast.LENGTH_SHORT)
+                                .show()
                         }
                     }
 

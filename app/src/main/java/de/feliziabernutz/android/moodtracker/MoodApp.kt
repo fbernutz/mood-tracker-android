@@ -10,8 +10,10 @@ class MoodApp : Application() {
         super.onCreate()
 
         GlobalScope.launch {
-            db = Room.databaseBuilder(applicationContext,
-                    AppDatabase::class.java, "moods.db").build()
+            db = Room.databaseBuilder(
+                applicationContext,
+                AppDatabase::class.java, "moods.db"
+            ).build()
         }
     }
 
