@@ -13,7 +13,7 @@ This is my first attempt in kotlin and android. :v:
 
 | Choose your mood | Mood History |
 |---|---|
-| <img src="https://raw.githubusercontent.com/fbernutz/mood-tracker-android/master/assets/mood-tracker-01.png" width="400" alt="Choose you mood" /> | <img src="https://raw.githubusercontent.com/fbernutz/mood-tracker-android/master/assets/mood-tracker-02.png" width="400" alt="Mood History" /> |
+| <img src="https://raw.githubusercontent.com/fbernutz/mood-tracker-android/master/assets/mood-tracker-01.png" width="200" alt="Choose you mood" /> | <img src="https://raw.githubusercontent.com/fbernutz/mood-tracker-android/master/assets/mood-tracker-02.png" width="200" alt="Mood History" /> |
 
 ## 🎯 Goals 
 
