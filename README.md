@@ -1,6 +1,6 @@
 # Mood Tracker
 
-[![Build Status](https://travis-ci.com/fbernutz/mood-tracker-android.svg?branch=master)](https://travis-ci.com/fbernutz/mood-tracker-android.svg?branch=master)
+[![Build Status](https://travis-ci.org/fbernutz/mood-tracker-android.svg?branch=master)](https://travis-ci.org/fbernutz/mood-tracker-android.svg?branch=master)
 [![code](https://img.shields.io/badge/code-Kotlin-blue.svg)]()
 [![platform](https://img.shields.io/badge/platform-android-lightgrey.svg)]()
 [![languages](https://img.shields.io/badge/languages-en,_de-lightgrey.svg)](https://img.shields.io/badge/languages-en,_de-lightgrey.svg)
