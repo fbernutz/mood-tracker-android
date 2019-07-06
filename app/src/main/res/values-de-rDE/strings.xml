@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">MoodTracking</string>
+    <string name="bad_mood">Schlechte Stimmung</string>
+    <string name="choose_your_mood">Wähle deine Stimmung</string>
+    <string name="good_mood">Gute Stimmung</string>
+    <string name="mood">Stimmung</string>
+    <string name="mood_list">Stimmungsliste</string>
+    <string name="normal_mood">Ausgeglichene Stimmung</string>
+    <string name="saved">Stimmung gespeichert</string>
+    <string name="updated">Stimmung geändert</string>
+</resources>
